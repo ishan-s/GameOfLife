@@ -1,0 +1,5 @@
+.LOG
+
+FIXED
+===
+- IE: Controls div not properly aligned [FIXED]
