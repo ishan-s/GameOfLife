@@ -10,7 +10,7 @@ TODO
 - When population reaches zero : Reset the Live! button, stop animation, Game over dialogue/popup(?)
 - Randomized seeding
 - Feature to seed well-known shapes : gliders, LWSS, beacons, etc.
-- Stylize the page (!)
+- Stylize the page : Statistics section, control panel (!)
 
 
 BUGS
