@@ -1,0 +1,47 @@
+
+body {
+    font-family: sans-serif;
+}
+
+#divTitle {
+    width: inherit;
+}
+.title {
+    text-align: center;
+    padding-left: 20px;
+}
+
+
+#divMainDraw {
+    float:left;
+    align: center;
+    padding-left: 20px;
+    padding-top: 20px;
+
+}
+
+#divCanvases {
+    padding-bottom: 20px;
+}
+
+#divMainStats {
+    float: right;
+    align: center;
+    width: auto;
+}
+
+#divButtons {
+  
+}
+table {
+    table-layout: fixed;
+}
+table td{
+    width: 250px;   
+    overflow: hidden;
+    align: content;
+}
+
+table tr.controlButtonRow {
+     
+}

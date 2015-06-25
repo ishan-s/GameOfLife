@@ -1,0 +1,25 @@
+.LOG
+
+11:38 AM 25-Jun-15
+TODO
+===
+- Make the grid & cell size customizable : Sliders would be great.
+* NOTE: Most of the calculations are already done with variables, should not need major modifications.
+
+- Add statistics : seed population, currently alive cells, max population, time cycles, time cycle of max population, time cycle of apocalypse.
+- When population reaches zero : Reset the Live! button, stop animation, Game over dialogue/popup(?)
+- Randomized seeding
+- Feature to seed well-known shapes : gliders, LWSS, beacons, etc.
+- Stylize the page (!)
+
+
+BUGS
+===
+- IE: Controls div not properly aligned
+- FF: Canvas.onClick is not doing anything
+- Directly changing the slider at frozen/stopped state messes up the live/freeze cycle.
+
+----
+11:38 AM 25-Jun-15
+
+12:12 PM 25-Jun-15
