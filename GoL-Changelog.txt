@@ -4,3 +4,8 @@ FIXED
 ===
 - IE: Controls div not properly aligned [FIXED]
 - Directly changing the slider at frozen/stopped state messes up the live/freeze cycle. [FIXED]
+
+
+29th June 2015
+- Added support for drag and drop placement of four basic shapes: boat, block, loaf & beehive.
+- Minor fixes

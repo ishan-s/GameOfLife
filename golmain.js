@@ -12,6 +12,77 @@ var play = false;
 var lifeGrid = new Array(numCellsX);
 var tempGrid = new Array(numCellsX);
 var lifeAnimationTimeout = 100;
+var imgShape = document.getElementById("imgShape");
+var imgSelector = document.getElementById("imgSelector");
+var CELL_COLOR = "rgb(0, 200, 255)";
+
+function shapeSelect(val){
+    if(val=="block")
+        imgShape.src="./images/block.png";
+    else if(val=="beehive")
+        imgShape.src="./images/beehive.png";
+    else if(val=="loaf")
+        imgShape.src="./images/loaf.png";
+    else if(val=="boat")
+        imgShape.src="./images/boat.png";
+}
+
+
+
+function getMousePositionOnDrop(ev){
+/*  var X = event.layerX - $(event.target).position().left;
+    var Y = event.layerY - $(event.target).position().top;
+    */
+    var X = ev.pageX - ev.currentTarget.offsetLeft
+    var Y = ev.pageY - ev.currentTarget.offsetTop;
+
+    return {x:X, y:Y};
+}
+
+var pos;
+function getPos(ev){
+    pos = [ev.pageX, ev.pageY];
+}
+      
+    
+function allowDrop(ev) {
+    
+    ev.preventDefault();
+}
+
+function drag(ev){
+    var selectedshape = imgSelector.options[imgSelector.selectedIndex].value;
+    ev.dataTransfer.setData("shape", selectedshape);
+}
+
+function drop(ev){
+    ev.preventDefault();
+    
+
+    var dataS = ev.dataTransfer.getData("shape");
+    var mPos = getMousePositionOnDrop(ev);
+//   alert(mPos.x +","+mPos.y);
+//   alert(dataS);
+    
+    drawShapeOnCoords(dataS, mPos);
+}
+
+function drawShapeOnCoords(shape, spos){
+    var centerCellIndex = getCellIndexForClick(spos);
+    
+    if(shape=="block")
+        drawBlock(centerCellIndex);
+    
+}
+
+function drawBlock(cell){
+    lifeGrid[cell.x_index][cell.y_index]=1;
+    lifeGrid[cell.x_index][cell.y_index+1]=1;
+    lifeGrid[cell.x_index+1][cell.y_index]=1;
+    lifeGrid[cell.x_index+1][cell.y_index+1]=1;
+    
+    redrawColoredCells();
+}
 
 var i;
 for(i=0; i<numCellsX; i++){
@@ -132,11 +203,27 @@ function redrawColoredCells(){
     for(var xi = 0; xi<numCellsX; xi++){
         for(yi = 0; yi<numCellsY; yi++){
             if(lifeGrid[xi][yi]==1)
-                colorCell(ctxMain, xi, yi, "rgb(0, 200, 255)");
+                colorCell(ctxMain, xi, yi, CELL_COLOR);
         }
     }
 }
 
+function colorCellOnCoords(coord){
+    var ci = getCellIndexForClick(coord);
+    
+    alert("ci.x: "+ci.x_index+", ci.y: "+ci.y_index);
+    
+    if(Number(lifeGrid[ci.x_index][ci.y_index])==1){
+        lifeGrid[ci.x_index][ci.y_index] = 0
+    }
+    else
+        lifeGrid[ci.x_index][ci.y_index] = 1;
+    
+    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    redrawColoredCells();
+    document.getElementById("spnXY").innerHTML= ci.x_index+", "+ci.y_index;
+    
+}
 
 function colorCellOnClick(){
     var mc = canvasMain.relMouseCoords(event);

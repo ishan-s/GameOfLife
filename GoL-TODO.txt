@@ -9,15 +9,16 @@ TODO
 - Add statistics : seed population, currently alive cells, max population, time cycles, time cycle of max population, time cycle of apocalypse.
 - When population reaches zero : Reset the Live! button, stop animation, Game over dialogue/popup(?)
 - Randomized seeding
-- Feature to seed well-known shapes : gliders, LWSS, beacons, etc.
+- Feature to seed well-known shapes : gliders, LWSS, beacons, etc. [PARITALLY DONE]
+  - Seed more shapes -> golshapes.js
 - Stylize the page : Statistics section, control panel (!)
 
 
 BUGS
 ===
-- IE: Controls div not properly aligned
+- IE: Controls div not properly aligned [FIXED]
 - FF: Canvas.onClick is not doing anything
-- Directly changing the slider at frozen/stopped state messes up the live/freeze cycle.
+- Directly changing the slider at frozen/stopped state messes up the live/freeze cycle. [FIXED]
 
 ----
 11:38 AM 25-Jun-15

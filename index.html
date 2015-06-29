@@ -10,7 +10,7 @@
         </div>
         <hr />
         <div id="divMainDraw" style="height:700px; width:500px">
-        <div id="divCanvases" style="position:relative; height:510px; width:510px">
+        <div id="divCanvases" style="position:relative; height:500px; width:500px" ondrop="drop(event)" ondragover="allowDrop(event)">
         <canvas id="canvas_main" width="500" height="500" style="z-index: 1; position:absolute; left:0px; top:0px;">Your browser does not supprt Canvas!</canvas>
         <canvas id="canvas_grid" width="500" height="500" style="z-index: 2; position:absolute; left:0px; top:0px; border:1px solid #000000" onclick="colorCellOnClick()">Your browser does not supprt Canvas!</canvas>
         <br />
@@ -37,7 +37,16 @@
         
 
         </table>
-        
+        <div id="divShapes">
+            <select id = "imgSelector" oninput="shapeSelect(this.value)" onchange="shapeSelect(this.value)">
+                <option value="block">Block</option>
+                <option value="beehive">Beehive</option>
+                <option value="loaf">Loaf</option>
+                <option value="boat">Boat</option>
+            </select>
+            <br />
+            <img id="imgShape" src="images/block.png" width="75" height="75" draggable="true" ondragstart="drag(event)" onmousedown="getPos(event)"/>
+        </div>
         </div>
         <hr />
         <span id="spnXY" style="float:right;"></span>
@@ -59,5 +68,6 @@
         
         <div id="divFooter"></div>
         <script src="golmain.js"></script>
+        <script src="golshapes.js"></script>
 </body>
 </html>
