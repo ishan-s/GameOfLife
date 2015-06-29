@@ -12,7 +12,9 @@ function drawShapeOnCoords(shape, spos){
     
     else if(shape=="boat")
         drawBoat(centerCellIndex);
-        
+    
+    else if(shape=="beacon")
+        drawBeacon(centerCellIndex);
     redrawColoredCells();
 }
 
@@ -48,4 +50,9 @@ function drawBoat(cell){
     lifeGrid[cell.x_index+2][cell.y_index+1]=1;
     lifeGrid[cell.x_index+1][cell.y_index+2]=1;
     lifeGrid[cell.x_index][cell.y_index+1]=1;
+}
+
+function drawBeacon(cell){
+    drawBlock(cell);
+    drawBlock({x_index:cell.x_index+2, y_index:cell.y_index+2});
 }

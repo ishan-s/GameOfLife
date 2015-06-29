@@ -25,6 +25,8 @@ function shapeSelect(val){
         imgShape.src="./images/loaf.png";
     else if(val=="boat")
         imgShape.src="./images/boat.png";
+    else if(val=="beacon")
+        imgShape.src="./images/beacon.gif";
 }
 
 
@@ -67,22 +69,6 @@ function drop(ev){
     drawShapeOnCoords(dataS, mPos);
 }
 
-function drawShapeOnCoords(shape, spos){
-    var centerCellIndex = getCellIndexForClick(spos);
-    
-    if(shape=="block")
-        drawBlock(centerCellIndex);
-    
-}
-
-function drawBlock(cell){
-    lifeGrid[cell.x_index][cell.y_index]=1;
-    lifeGrid[cell.x_index][cell.y_index+1]=1;
-    lifeGrid[cell.x_index+1][cell.y_index]=1;
-    lifeGrid[cell.x_index+1][cell.y_index+1]=1;
-    
-    redrawColoredCells();
-}
 
 var i;
 for(i=0; i<numCellsX; i++){
@@ -157,7 +143,7 @@ function drawGrid (){
 }
 
 function speedChange(playSpeed){
-    lifeAnimationTimeout = 1000 * (1/playSpeed);
+    lifeAnimationTimeout = 2000 * (1/playSpeed);
     clearTimeout(timer);
     if(play)
         timer = setInterval(letThereBeLife, lifeAnimationTimeout);
