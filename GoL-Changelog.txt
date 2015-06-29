@@ -3,3 +3,4 @@
 FIXED
 ===
 - IE: Controls div not properly aligned [FIXED]
+- Directly changing the slider at frozen/stopped state messes up the live/freeze cycle. [FIXED]

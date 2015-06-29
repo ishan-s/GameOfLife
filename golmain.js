@@ -8,7 +8,7 @@ var ctxMain = canvasMain.getContext("2d");
 var CELL_SIZE = 10;
 var numCellsX = canvasMain.width / CELL_SIZE;
 var numCellsY = canvasMain.height / CELL_SIZE;
-var play = true;
+var play = false;
 var lifeGrid = new Array(numCellsX);
 var tempGrid = new Array(numCellsX);
 var lifeAnimationTimeout = 100;
@@ -28,10 +28,6 @@ function resetTempGrid(){
 }
 
 
-function pause(){
-    play = !play;
-}
-
 function init(){
     drawGrid();
     for(var ix=0; ix<numCellsX; ix++)
@@ -48,6 +44,7 @@ function playPause(val){
         stopAnimation();
         document.getElementById("button_playpause").value="Live!"
     }
+    play = !play;
 }
     
 
@@ -91,7 +88,8 @@ function drawGrid (){
 function speedChange(playSpeed){
     lifeAnimationTimeout = 1000 * (1/playSpeed);
     clearTimeout(timer);
-    timer = setInterval(letThereBeLife, lifeAnimationTimeout);
+    if(play)
+        timer = setInterval(letThereBeLife, lifeAnimationTimeout);
 }
 
 function colorCell(ctx, cellx, celly, rgbColor){
