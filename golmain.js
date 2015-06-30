@@ -22,6 +22,7 @@ var lifeAnimationTimeout = 100;
 var imgShape = document.getElementById("imgShape");
 var imgSelector = document.getElementById("imgSelector");
 var CELL_COLOR = "rgb(255, 200, 0)";
+var CELL_COLOR_AGED = "rgb(250, 150, 0)";
 
 
 //TODO: For change in cell size
@@ -275,6 +276,8 @@ function redrawColoredCells(){
         for(yi = 0; yi<numCellsY; yi++){
             if(lifeGrid[xi][yi]==1)
                 colorCell(ctxMain, xi, yi, CELL_COLOR);
+            else if(lifeGrid[xi][yi]>1)
+                colorCell(ctxMain, xi, yi, CELL_COLOR_AGED);
         }
     }
 }
@@ -312,51 +315,58 @@ function colorCellOnClick(){
 
 }
 
+function alive(lifecell){
+    if(lifecell>=1)
+        return 1;
+    else
+        return 0;
+}
+
 function neighbourhood(x, y){
     //alert("neighbourhood("+x+","+y+")");
     var aliveNeighbours = 0;
     if(x==0 && y==0){
-        aliveNeighbours = lifeGrid[1][0] + lifeGrid[1][1] + lifeGrid[0][1];
+        aliveNeighbours = alive(lifeGrid[1][0]) + alive(lifeGrid[1][1]) + alive(lifeGrid[0][1]);
         return aliveNeighbours;
     }
     
     else if(x==0 && y==numCellsY-1){
-        aliveNeighbours = lifeGrid[0][numCellsY-2] + lifeGrid[1][numCellsY-2] + lifeGrid[1][numCellsY-1];
+        aliveNeighbours = alive(lifeGrid[0][numCellsY-2]) + alive(lifeGrid[1][numCellsY-2]) + alive(lifeGrid[1][numCellsY-1]);
         return aliveNeighbours;
     }
         
     else if(x==numCellsX-1 && y==0){
-                aliveNeighbours = lifeGrid[numCellsX-2][0] + lifeGrid[numCellsX-2][1] + lifeGrid[numCellsX-1][1];
+                aliveNeighbours = alive(lifeGrid[numCellsX-2][0]) + alive(lifeGrid[numCellsX-2][1]) + alive(lifeGrid[numCellsX-1][1]);
         return aliveNeighbours;
     }
         
     else if(x==numCellsX-1 && y==numCellsY-1){
-         aliveNeighbours = lifeGrid[numCellsX-2][numCellsY-1] + lifeGrid[numCellsX-2][numCellsY-2] + lifeGrid[numCellsX-1][numCellsY-2];
+         aliveNeighbours = alive(lifeGrid[numCellsX-2][numCellsY-1]) + alive(lifeGrid[numCellsX-2][numCellsY-2]) + alive(lifeGrid[numCellsX-1][numCellsY-2]);
         return aliveNeighbours;
     }
     
     else if(y==0){
-        aliveNeighbours = lifeGrid[x-1][y] + lifeGrid[x-1][y+1] + lifeGrid[x][y+1] + lifeGrid[x+1][y+1] + lifeGrid[x+1][y];
+        aliveNeighbours = alive(lifeGrid[x-1][y]) + alive(lifeGrid[x-1][y+1]) + alive(lifeGrid[x][y+1]) + alive(lifeGrid[x+1][y+1]) + alive(lifeGrid[x+1][y]);
         return aliveNeighbours;
     }
     
     else if(x==numCellsX-1){
-         aliveNeighbours = lifeGrid[x][y-1] + lifeGrid[x-1][y-1] + lifeGrid[x-1][y] + lifeGrid[x-1][y+1] + lifeGrid[x][y+1];
+         aliveNeighbours = alive(lifeGrid[x][y-1]) + alive(lifeGrid[x-1][y-1]) + alive(lifeGrid[x-1][y]) + alive(lifeGrid[x-1][y+1]) + alive(lifeGrid[x][y+1]);
         return aliveNeighbours;
     }
     
     else if(y==numCellsY-1){
-         aliveNeighbours = lifeGrid[x-1][y] + lifeGrid[x-1][y-1] + lifeGrid[x][y-1] + lifeGrid[x+1][y-1] + lifeGrid[x+1][y];
+         aliveNeighbours = alive(lifeGrid[x-1][y]) + alive(lifeGrid[x-1][y-1]) + alive(lifeGrid[x][y-1]) + alive(lifeGrid[x+1][y-1]) + alive(lifeGrid[x+1][y]);
         return aliveNeighbours;
     }
     
     else if(x==0){
-         aliveNeighbours = lifeGrid[x][y-1] + lifeGrid[x+1][y-1] + lifeGrid[x+1][y] + lifeGrid[x+1][y+1] + lifeGrid[x][y+1];
+         aliveNeighbours = alive(lifeGrid[x][y-1]) + alive(lifeGrid[x+1][y-1]) + alive(lifeGrid[x+1][y]) + alive(lifeGrid[x+1][y+1]) + alive(lifeGrid[x][y+1]);
         return aliveNeighbours;
     }
     
     else{
-        aliveNeighbours = lifeGrid[x-1][y-1] + lifeGrid[x][y+1] + lifeGrid[x+1][y-1] + lifeGrid[x+1][y] + lifeGrid[x+1][y+1] + lifeGrid[x][y-1] + lifeGrid[x-1][y+1] + lifeGrid[x-1][y];
+        aliveNeighbours = alive(lifeGrid[x-1][y-1]) + alive(lifeGrid[x][y+1]) + alive(lifeGrid[x+1][y-1]) + alive(lifeGrid[x+1][y]) + alive(lifeGrid[x+1][y+1]) + alive(lifeGrid[x][y-1]) + alive(lifeGrid[x-1][y+1]) + alive(lifeGrid[x-1][y]);
         return aliveNeighbours;
     }
     
@@ -373,7 +383,7 @@ function letThereBeLife(){
             //alert("ndata("+xi+", "+yi+")="+ndata);
             
             //fewer than 2 live neighbours - DIE!!!
-            if(lifeGrid[xi][yi]==1){
+            if(lifeGrid[xi][yi]>=1){
                  if(ndata<2){
                     tempGrid[xi][yi] = false;
                     continue;
@@ -404,7 +414,7 @@ function letThereBeLife(){
             //alert("ndata("+xi+", "+yi+")="+ndata);
             
             //fewer than 2 live neighbours - DIE!!!
-            if(lifeGrid[yi][xi]==1){
+            if(lifeGrid[yi][xi]>=1){
                  if(ndata<2){
                     tempGrid[yi][xi] = tempGrid[yi][xi]&&false;
                     continue;
@@ -421,6 +431,7 @@ function letThereBeLife(){
                 //alert("dead");
                 if(ndata==3){
                 tempGrid[yi][xi] = tempGrid[yi][xi]||true;
+                    //alert(xi+","+yi+":"+tempGrid[yi][xi]);
                 continue;
                 //alert("LIVE - population("+ndata+"+) - "+xi+", "+yi);
                 }
@@ -430,8 +441,10 @@ function letThereBeLife(){
             
     for(var xi=0; xi<numCellsX; xi++){
         for(var yi=0; yi<numCellsY; yi++){
-            if(tempGrid[xi][yi])
-                lifeGrid[xi][yi]=1;
+            if(tempGrid[xi][yi]){
+                //if(lifeGrid[xi][yi]>=1)
+                    lifeGrid[xi][yi]++;
+            }
             else
                 lifeGrid[xi][yi]=0;
         }
