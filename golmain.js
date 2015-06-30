@@ -55,6 +55,8 @@ function shapeSelect(val){
         imgShape.src="./images/lwss.gif";
     else if(val=="toad")
         imgShape.src="./images/toad.gif";
+    else if(val=="pulsar")
+        imgShape.src="./images/pulsar.gif";
 }
 
 
@@ -178,6 +180,8 @@ function speedChange(playSpeed){
     clearTimeout(timer);
     if(play)
         timer = setInterval(letThereBeLife, lifeAnimationTimeout);
+    
+    redrawColoredCells();
 }
 
 

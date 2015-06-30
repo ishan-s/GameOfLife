@@ -25,8 +25,11 @@ function drawShapeOnCoords(shape, spos){
     else if(shape=="lwss")
         drawLwss(centerCellIndex);
     
-    else if(shape="toad")
+    else if(shape=="toad")
         drawToad(centerCellIndex);
+          
+    else if(shape=="pulsar")
+        drawPulsar(centerCellIndex);
     
     redrawColoredCells();
 }
@@ -100,4 +103,26 @@ function drawLwss(cell){
 function drawToad(cell){
     drawBlinkerH(cell);
     drawBlinkerH({x_index:cell.x_index-1, y_index:cell.y_index+1});
+}
+
+function drawPulsar(cell){
+     drawBlinkerH({x_index:cell.x_index-3, y_index:cell.y_index-1});
+     drawBlinkerH({x_index:cell.x_index-3, y_index:cell.y_index+1});
+     drawBlinkerH({x_index:cell.x_index+3, y_index:cell.y_index-1});
+     drawBlinkerH({x_index:cell.x_index+3, y_index:cell.y_index+1});
+    
+     drawBlinkerH({x_index:cell.x_index-3, y_index:cell.y_index+6});
+     drawBlinkerH({x_index:cell.x_index-3, y_index:cell.y_index-6});
+     drawBlinkerH({x_index:cell.x_index+3, y_index:cell.y_index+6});
+     drawBlinkerH({x_index:cell.x_index+3, y_index:cell.y_index-6});
+    
+     drawBlinkerV({x_index:cell.x_index-1, y_index:cell.y_index-3});
+     drawBlinkerV({x_index:cell.x_index-1, y_index:cell.y_index+3});
+     drawBlinkerV({x_index:cell.x_index+1, y_index:cell.y_index-3});
+     drawBlinkerV({x_index:cell.x_index+1, y_index:cell.y_index+3});
+    
+     drawBlinkerV({x_index:cell.x_index-6, y_index:cell.y_index-3});
+     drawBlinkerV({x_index:cell.x_index-6, y_index:cell.y_index+3});
+     drawBlinkerV({x_index:cell.x_index+6, y_index:cell.y_index-3});
+     drawBlinkerV({x_index:cell.x_index+6, y_index:cell.y_index+3}); 
 }
