@@ -22,8 +22,26 @@ var lifeAnimationTimeout = 100;
 var imgShape = document.getElementById("imgShape");
 var imgSelector = document.getElementById("imgSelector");
 var CELL_COLOR = "rgb(255, 200, 0)";
-var CELL_COLOR_AGED = "rgb(250, 150, 0)";
+var CELL_COLOR_OLD = "rgb(250, 150, 0)";
+var CELL_COLOR_OLDER = "rgb(200, 100, 0)";
+var fabulousMode = getParameter('rainbow');
 
+var COLOR_VIOLET = '#9F00FF';
+var COLOR_INDIGO = '#4B0082';
+var COLOR_BLUE = '#0000FF';
+var COLOR_GREEN = '#1CAC78';
+var COLOR_YELLOW = '#FFFF00';
+var COLOR_ORANGE = '#FF7F00';
+var COLOR_RED = '#FF0000';
+
+var COLORS_RAINBOW = new Array(8);
+COLORS_RAINBOW[1] = COLOR_VIOLET;
+COLORS_RAINBOW[2] = COLOR_INDIGO;
+COLORS_RAINBOW[3] = COLOR_BLUE;
+COLORS_RAINBOW[4] = COLOR_GREEN;
+COLORS_RAINBOW[5] = COLOR_YELLOW;
+COLORS_RAINBOW[6] = COLOR_ORANGE;
+COLORS_RAINBOW[7] = COLOR_RED;
 
 //TODO: For change in cell size
 function recalcVars(){
@@ -146,7 +164,7 @@ function changeGridSize(cellsize){
     if(url.indexOf('?')>-1){
         var i1 = url.indexOf('gridsize=');
         if(i1<0)
-            url+='gridsize='+cellsize;
+            url+='&gridsize='+cellsize;
         else{
             var i2=url.indexOf('&', i1);
             var url2;
@@ -274,10 +292,33 @@ function getCellIndexForClick(coords){
 function redrawColoredCells(){
     for(var xi = 0; xi<numCellsX; xi++){
         for(yi = 0; yi<numCellsY; yi++){
+            if((typeof fabulousMode != 'undefined') && lifeGrid[xi][yi]>=1){
+                var ccolor;
+                
+                /* In commemoration of the LGBT week! */
+                if(fabulousMode=='horizontal')
+                    ccolor = COLORS_RAINBOW[(xi*0.5)%7 + 1];
+                else if(fabulousMode=='vertical')
+                    ccolor = COLORS_RAINBOW[(yi*0.5)%7 + 1];
+                else if(fabulousMode=='diagonal')
+                    ccolor = COLORS_RAINBOW[(((xi+yi)*0.5)%7) + 1];
+                else if(fabulousMode=='age'){
+                    if(lifeGrid[xi][yi]<7)
+                        ccolor = COLORS_RAINBOW[lifeGrid[xi][yi]];
+                    else
+                        ccolor = COLORS_RAINBOW[7];
+                }
+                colorCell(ctxMain, xi, yi, ccolor);    
+            }
+            /* For us straight people ;) */
+            else{                
             if(lifeGrid[xi][yi]==1)
                 colorCell(ctxMain, xi, yi, CELL_COLOR);
-            else if(lifeGrid[xi][yi]>1)
-                colorCell(ctxMain, xi, yi, CELL_COLOR_AGED);
+            else if(lifeGrid[xi][yi]>1 && lifeGrid[xi][yi]<=3)
+                colorCell(ctxMain, xi, yi, CELL_COLOR_OLD);
+            else if(lifeGrid[xi][yi]>3)
+                colorCell(ctxMain, xi, yi, CELL_COLOR_OLDER);
+            }
         }
     }
 }
