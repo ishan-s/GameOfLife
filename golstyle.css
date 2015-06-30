@@ -27,7 +27,27 @@ body {
 #divMainStats {
     float: right;
     align: center;
+    align-content: center;
     width: auto;
+    padding: 20px;
+    padding-left: 20px;
+}
+
+#divMainStats table {
+    border: 1px;
+    border-style:double;
+
+}
+
+#divMainStats table td {
+    border: 1px;
+    border-style: groove;
+    align: content;
+    padding: 10px;
+}
+
+.numbers {
+    padding: 20px;
 }
 
 #divButtons {
@@ -36,12 +56,10 @@ body {
 table {
     table-layout: fixed;
 }
-table td{
+#divControls table td{
     width: 250px;   
     overflow: hidden;
     align: content;
 }
 
-table tr.controlButtonRow {
-     
-}
+

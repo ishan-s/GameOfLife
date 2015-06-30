@@ -14,7 +14,7 @@ else
 
 var numCellsX = canvasMain.width / CELL_SIZE;
 var numCellsY = canvasMain.height / CELL_SIZE;
-var maxPopulation = numCellsX * numCellsY;
+var maxPossiiblePopulation = numCellsX * numCellsY;
 var play = false;
 var lifeGrid = new Array(numCellsX);
 var tempGrid = new Array(numCellsX);
@@ -42,6 +42,7 @@ COLORS_RAINBOW[4] = COLOR_GREEN;
 COLORS_RAINBOW[5] = COLOR_YELLOW;
 COLORS_RAINBOW[6] = COLOR_ORANGE;
 COLORS_RAINBOW[7] = COLOR_RED;
+
 
 //TODO: For change in cell size
 function recalcVars(){
@@ -135,6 +136,7 @@ function resetTempGrid(){
 
 function init(){
     drawGrid();
+    updateStatsDisplay();
     
     for(var ix=0; ix<numCellsX; ix++)
         for(var iy=0; iy<numCellsY; iy++)
@@ -266,12 +268,17 @@ function reset(){
      for(var ix=0; ix<numCellsX; ix++)
         for(var iy=0; iy<numCellsY; iy++)
             lifeGrid[ix][iy]=0;
+  
+        
+    initStats();
+    updateStatsDisplay();
     
     resetTempGrid();
+
 }
 
 function randomizeSeed(){    
-    var rndPopulation = Math.floor((Math.random() * maxPopulation) + 1);
+    var rndPopulation = Math.floor((Math.random() * maxPossiiblePopulation) + 1);
     for(var cnt=0; cnt<rndPopulation; cnt++){
         var rnx = Math.floor((Math.random() * numCellsX) + 1);
         var rny = Math.floor((Math.random() * numCellsY) + 1);   
@@ -346,12 +353,16 @@ function colorCellOnClick(){
     
     if(Number(lifeGrid[ci.x_index][ci.y_index])==1){
         lifeGrid[ci.x_index][ci.y_index] = 0
+        currentPopulation--;
     }
-    else
+    else{
         lifeGrid[ci.x_index][ci.y_index] = 1;
+        currentPopulation++;
+    }
     
     ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
     redrawColoredCells();
+    updateStatsDisplay();
     document.getElementById("spnXY").innerHTML= ci.x_index+", "+ci.y_index;
 
 }
@@ -415,6 +426,7 @@ return aliveNeighbours;
 }
 
 function letThereBeLife(){
+    currentPopulation=0;
     ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
    // alert("letThereBeLife()");
     for(var xi=0; xi<numCellsX; xi++){
@@ -458,42 +470,50 @@ function letThereBeLife(){
             if(lifeGrid[yi][xi]>=1){
                  if(ndata<2){
                     tempGrid[yi][xi] = tempGrid[yi][xi]&&false;
+                                 
                     continue;
                 }
                 else if(ndata==2 || ndata==3){
                     tempGrid[yi][xi] = tempGrid[yi][xi]||true;
+                  
                 }
                 else if(ndata>3){
                     tempGrid[yi][xi] = tempGrid[yi][xi]&&false;
+                                
                     continue;
                 }
             }
             else if(lifeGrid[yi][xi]==0){
-                //alert("dead");
                 if(ndata==3){
                 tempGrid[yi][xi] = tempGrid[yi][xi]||true;
-                    //alert(xi+","+yi+":"+tempGrid[yi][xi]);
+                
                 continue;
-                //alert("LIVE - population("+ndata+"+) - "+xi+", "+yi);
                 }
             }   
         }
     }
-            
+     
     for(var xi=0; xi<numCellsX; xi++){
         for(var yi=0; yi<numCellsY; yi++){
             if(tempGrid[xi][yi]){
                 //if(lifeGrid[xi][yi]>=1)
                     lifeGrid[xi][yi]++;
+                   currentPopulation++;
             }
             else
                 lifeGrid[xi][yi]=0;
+            
+            if(currentPopulation>maxPopulation)
+                maxPopulation=currentPopulation;
         }
     }
     
+    
+    updateStatsDisplay();
     redrawColoredCells();
     resetTempGrid();
 }
+
 
 function testndata(){
     var ix = document.getElementById("xtest").value;
