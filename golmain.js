@@ -15,7 +15,7 @@ var tempGrid = new Array(numCellsX);
 var lifeAnimationTimeout = 100;
 var imgShape = document.getElementById("imgShape");
 var imgSelector = document.getElementById("imgSelector");
-var CELL_COLOR = "rgb(0, 200, 255)";
+var CELL_COLOR = "rgb(255, 200, 0)";
 
 //TODO: For change in cell size
 /*function recalcVars(){
