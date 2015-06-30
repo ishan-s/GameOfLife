@@ -66,6 +66,13 @@
     Show Grid: <input type="checkbox" id="isShowGrid" checked onchange="showGrid(this.checked)" oninput="showGrid(this.checked)"/>
     </td>
 </tr>
+<tr>
+    <td>
+    Cell Size: 
+        <input type="radio" name="cellsize" id="radioCellSizeFine" value="5" checked onchange="changeGridSize(this.value)">Fine
+        <input type="radio" name="cellsize" id="radioCellSizeCoarse" value="10" onchange="changeGridSize(this.value)">Coarse
+    </td>
+</tr>
 </table>
     </div>
         </div>

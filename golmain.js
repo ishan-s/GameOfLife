@@ -1,11 +1,17 @@
-var cx = 0;
-var cy = 0;
+function getQueryParams(qs) { var d=decodeURIComponent,r = {},s=/[?&]?([^=]+)=([^&]*)/g; while(i=s.exec(qs)){r[d(i[1])]=d(i[2]);} return r; } 
+function getParameter(name) { try{ return getQueryParams (location.search)[name]; } catch (e){ return ''; } }
 var timer = null;
 var canvasGrid = document.getElementById("canvas_grid");
 var canvasMain = document.getElementById("canvas_main");
 var ctxGrid = canvasGrid.getContext("2d");
 var ctxMain = canvasMain.getContext("2d");
-var CELL_SIZE = 10;
+var CELL_SIZE=10;
+CELL_SIZE = getParameter('gridsize');
+if(typeof CELL_SIZE=='undefined')
+    CELL_SIZE=10;
+else
+    CELL_SIZE=Number(CELL_SIZE);
+
 var numCellsX = canvasMain.width / CELL_SIZE;
 var numCellsY = canvasMain.height / CELL_SIZE;
 var maxPopulation = numCellsX * numCellsY;
@@ -17,8 +23,9 @@ var imgShape = document.getElementById("imgShape");
 var imgSelector = document.getElementById("imgSelector");
 var CELL_COLOR = "rgb(255, 200, 0)";
 
+
 //TODO: For change in cell size
-/*function recalcVars(){
+function recalcVars(){
     alert("recalc:"+CELL_SIZE);
     numCellsX = canvasMain.width / CELL_SIZE;
     numCellsY = canvasMain.height / CELL_SIZE;
@@ -34,7 +41,7 @@ function cellSizeChange(cellSize){
     reset();
     CELL_SIZE = Number(cellSize);
     recalcVars();
-}*/
+}
 
 function shapeSelect(val){
     if(val=="block")
@@ -59,8 +66,6 @@ function shapeSelect(val){
         imgShape.src="./images/pulsar.gif";
 }
 
-
-
 function getMousePositionOnDrop(ev){
 /*  var X = event.layerX - $(event.target).position().left;
     var Y = event.layerY - $(event.target).position().top;
@@ -76,7 +81,6 @@ function getPos(ev){
     pos = [ev.pageX, ev.pageY];
 }
       
-    
 function allowDrop(ev) {
     
     ev.preventDefault();
@@ -90,15 +94,10 @@ function drag(ev){
 function drop(ev){
     ev.preventDefault();
     
-
     var dataS = ev.dataTransfer.getData("shape");
     var mPos = getMousePositionOnDrop(ev);
-//   alert(mPos.x +","+mPos.y);
-//   alert(dataS);
-    
     drawShapeOnCoords(dataS, mPos);
 }
-
 
 var i;
 for(i=0; i<numCellsX; i++){
@@ -117,11 +116,15 @@ function resetTempGrid(){
 
 function init(){
     drawGrid();
+    
     for(var ix=0; ix<numCellsX; ix++)
         for(var iy=0; iy<numCellsY; iy++)
             lifeGrid[ix][iy]=0;
     
-    
+    if(CELL_SIZE<10)
+        document.getElementById('radioCellSizeFine').checked=true;
+    else
+        document.getElementById('radioCellSizeCoarse').checked=true;
 }
 
 function playPause(val){
@@ -134,6 +137,31 @@ function playPause(val){
         document.getElementById("button_playpause").value="Live!"
     }
     play = !play;
+}
+
+function changeGridSize(cellsize){
+    var url = window.location.href;
+    var ind=-1;
+    if(url.indexOf('?')>-1){
+        var i1 = url.indexOf('gridsize=');
+        if(i1<0)
+            url+='gridsize='+cellsize;
+        else{
+            var i2=url.indexOf('&', i1);
+            var url2;
+            if(i2<0)
+                url2=url.substring(0, i1)+'gridsize='+cellsize;
+            else
+                url2=url.substring(0, i1)+'gridsize='+cellsize+url.substring(i2,url.length);
+            
+            url=url2;
+        }
+    }
+    else{
+        url+='?gridsize='+cellsize;
+    }
+        
+    window.location.href=url;
 }
 
 function showGrid(showgrid){
@@ -412,7 +440,6 @@ function letThereBeLife(){
     redrawColoredCells();
     resetTempGrid();
 }
-
 
 function testndata(){
     var ix = document.getElementById("xtest").value;
