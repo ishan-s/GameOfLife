@@ -135,7 +135,13 @@ function playPause(val){
     }
     play = !play;
 }
-    
+
+function showGrid(showgrid){
+    if(!showgrid)
+        ctxGrid.clearRect(0,0,canvasGrid.width, canvasGrid.height);
+    else
+        drawGrid();
+}
 
 function relMouseCoords(event){
     var totalOffsetX = 0;
