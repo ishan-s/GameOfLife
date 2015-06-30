@@ -9,3 +9,9 @@ FIXED
 29th June 2015
 - Added support for drag and drop placement of four basic shapes: boat, block, loaf & beehive.
 - Minor fixes
+
+30th June 2015
+- Added more shapes: blinker, lwss, toad, beacon
+- Tested & decided against cell size changes (maybe will revisit later)
+- Added randomize seeding button
+- Minor changes to HTML elements arrangement

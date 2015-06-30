@@ -19,35 +19,49 @@
         <div id="divControls">
         <table>
             <tr>
-        Speed:<input type="range" name="playSpeed" min="1" max="50" oninput="speedChange(this.value)" onchange="speedChange(this.value)" style="float: right;width:400px !important" />
+                <td>Speed:</td>
+                <td><input type="range" name="playSpeed" min="1" max="50" oninput="speedChange(this.value)" onchange="speedChange(this.value)" style="float: right;width:400px !important" value=25/>
+                </td>
         </tr>
-        <br />
-        <br />
-        <tr>
+            </table>
+            <br/>
+            <table>
         <tr class="controlButtonRow">
         <div id="divButtons" width="500px" align="center" class="controlbuttons" >
             <td align="center">
-        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live!" style="width:75px;height:50px" />
+        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live!" style="width:100px;height:50px" />
         </td>
             <td align="center">
-        <input type="button" id="button_reset" onclick="reset()" value="Reset!" style="width:75px; height:50px"/>
+        <input type="button" id="button_reset" onclick="reset()" value="Reset!" style="width:100px; height:50px"/>
         </td>
+            <td align="center">
+                <input type="button" id="button_random" onclick="randomizeSeed()" value="Randomize!" style="width:100px; height:50px"/>
+            </td>
         </div>
         </tr>     
-        
-
-        </table>
+     </table>
+        <br />
         <div id="divShapes">
+        <table>
+        <tr class="controlButtonRow">
+            <td>
             <select id = "imgSelector" oninput="shapeSelect(this.value)" onchange="shapeSelect(this.value)">
                 <option value="block">Block</option>
                 <option value="beehive">Beehive</option>
                 <option value="loaf">Loaf</option>
                 <option value="boat">Boat</option>
                 <option value="beacon">Beacon</option>
+                <option value="blinker">Blinker</option>
+                <option value="glider">Glider</option>
+                <option value="lwss">LWSS</option>
+                <option value="toad">Toad</option>
             </select>
             <br />
             <img id="imgShape" src="images/block.png" width="75" height="75" draggable="true" ondragstart="drag(event)" onmousedown="getPos(event)"/>
-        </div>
+            </td>
+ </tr>
+</table>
+    </div>
         </div>
         <hr />
         <span id="spnXY" style="float:right;"></span>

@@ -8,6 +8,7 @@ var ctxMain = canvasMain.getContext("2d");
 var CELL_SIZE = 10;
 var numCellsX = canvasMain.width / CELL_SIZE;
 var numCellsY = canvasMain.height / CELL_SIZE;
+var maxPopulation = numCellsX * numCellsY;
 var play = false;
 var lifeGrid = new Array(numCellsX);
 var tempGrid = new Array(numCellsX);
@@ -15,6 +16,25 @@ var lifeAnimationTimeout = 100;
 var imgShape = document.getElementById("imgShape");
 var imgSelector = document.getElementById("imgSelector");
 var CELL_COLOR = "rgb(0, 200, 255)";
+
+//TODO: For change in cell size
+/*function recalcVars(){
+    alert("recalc:"+CELL_SIZE);
+    numCellsX = canvasMain.width / CELL_SIZE;
+    numCellsY = canvasMain.height / CELL_SIZE;
+    
+    lifeGrid = new Array(numCellsX);
+    tempGrid = new Array(numCellsX);
+    
+    init();
+    resetTempGrid();
+}
+
+function cellSizeChange(cellSize){
+    reset();
+    CELL_SIZE = Number(cellSize);
+    recalcVars();
+}*/
 
 function shapeSelect(val){
     if(val=="block")
@@ -27,6 +47,14 @@ function shapeSelect(val){
         imgShape.src="./images/boat.png";
     else if(val=="beacon")
         imgShape.src="./images/beacon.gif";
+    else if(val=="blinker")
+        imgShape.src="./images/blinker.gif";
+    else if(val=="glider")
+        imgShape.src="./images/glider.gif";
+    else if(val=="lwss")
+        imgShape.src="./images/lwss.gif";
+    else if(val=="toad")
+        imgShape.src="./images/toad.gif";
 }
 
 
@@ -90,6 +118,8 @@ function init(){
     for(var ix=0; ix<numCellsX; ix++)
         for(var iy=0; iy<numCellsY; iy++)
             lifeGrid[ix][iy]=0;
+    
+    
 }
 
 function playPause(val){
@@ -126,14 +156,15 @@ function relMouseCoords(event){
 
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
-function drawGrid (){
+function drawGrid (){   
+    ctxGrid.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
     //draw grid lines
-    for (var x=0.5; x<500; x=x+10){
+    for (var x=0.5; x<500; x=x+CELL_SIZE){
         ctxGrid.moveTo(x, 0);
         ctxGrid.lineTo(x, 500);
     }
 
-    for(var y=0.5; y<500; y=y+10){
+    for(var y=0.5; y<500; y=y+CELL_SIZE){
         ctxGrid.moveTo(0, y);
         ctxGrid.lineTo(500, y);
     }
@@ -148,6 +179,7 @@ function speedChange(playSpeed){
     if(play)
         timer = setInterval(letThereBeLife, lifeAnimationTimeout);
 }
+
 
 function colorCell(ctx, cellx, celly, rgbColor){
     ctx.fillStyle = rgbColor;
@@ -180,6 +212,21 @@ function reset(){
     
     resetTempGrid();
 }
+
+function randomizeSeed(){    
+    var rndPopulation = Math.floor((Math.random() * maxPopulation) + 1);
+    for(var cnt=0; cnt<rndPopulation; cnt++){
+        var rnx = Math.floor((Math.random() * numCellsX) + 1);
+        var rny = Math.floor((Math.random() * numCellsY) + 1);   
+        lifeGrid[rnx][rny] = 1;
+        redrawColoredCells();
+    }
+    
+    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    redrawColoredCells();
+    
+}
+
 
 function getCellIndexForClick(coords){
     return {x_index:Math.floor(coords.x/CELL_SIZE), y_index:Math.floor(coords.y/CELL_SIZE)};    

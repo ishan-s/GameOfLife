@@ -3,16 +3,23 @@
 11:38 AM 25-Jun-15
 TODO
 ===
-- Make the grid & cell size customizable : Sliders would be great.
+- Make the grid & cell size customizable : Sliders would be great. [TESTED : NOT WORTH THE EFFORT]
 * NOTE: Most of the calculations are already done with variables, should not need major modifications.
 
 - Add statistics : seed population, currently alive cells, max population, time cycles, time cycle of max population, time cycle of apocalypse.
 - When population reaches zero : Reset the Live! button, stop animation, Game over dialogue/popup(?)
-- Randomized seeding
+- Randomized seeding [PARTIALLY DONE]
 - Feature to seed well-known shapes : gliders, LWSS, beacons, etc. [PARITALLY DONE]
   - Seed more shapes -> golshapes.js
+  - Ability to mirror/re-orient shapes.
 - Stylize the page : Statistics section, control panel (!)
+*NOTE: Really really need to cleanup the styling part. Move all/most internal styling to external css.
 
+- Better UI for shapes to drag & drop.
+- Improve the ranomized seeding algorithm
+- Color picker for cell color
+- Evolution color / Pride or "Marijuana" mode? ;
+- Code cleanup : golmain.js is getting messy. Re-org code blocks.
 
 BUGS
 ===
