@@ -107,6 +107,7 @@ function getMousePositionOnDrop(ev){
 var pos;
 function getPos(ev){
     pos = [ev.pageX, ev.pageY];
+
 }
       
 function allowDrop(ev) {
@@ -115,7 +116,8 @@ function allowDrop(ev) {
 }
 
 function drag(ev){
-    var selectedshape = imgSelector.options[imgSelector.selectedIndex].value;
+    /*var selectedshape = imgSelector.options[imgSelector.selectedIndex].value;*/
+    var selectedshape=ev.currentTarget.getAttribute('value');
     ev.dataTransfer.setData("shape", selectedshape);
 }
 

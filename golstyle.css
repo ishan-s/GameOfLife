@@ -21,15 +21,17 @@ body {
  background-color: black;
     padding: 10px;
     padding-bottom: 60px;
-    padding-left: 25%;
+    //margin-left:25%;
 }
 
 #divControls{
     background-color: #111111;
     padding: 20px;
     border: 2px;
-    border-color: dimgray;
-    border-style: solid;
+    width: 450px;
+    height: 460px;
+    float:left;
+    margin-top:20px;
 }
 
 #divTitle {
@@ -57,28 +59,32 @@ body {
 
 
 #divMainDraw {
-    float:left;
     align: center;
     padding:20px;
+    float:left;
 }
 
 #divCanvases {
     padding-bottom: 20px;
+    float:left;
 }
 
 #divMainStats {
     align: center;
     align-content: center;
     width: auto;
+    float:left;
     padding: 20px;
     padding-left: 20px;
+    margin-top: 20px;
+    background-color: #111111;
+    height: 460px;
 }
 
 #divMainStats table td {
     border: 2px;
     border-color: #111111;
     border-bottom-color: darkorange;
-    
     border-style: solid;
     align: content;
     padding: 10px;
@@ -101,10 +107,13 @@ table {
     border-color: black;
 }
 
+
+
 #divControls table td{
     width: 250px;   
     overflow: hidden;
     align: content;
+
 }
 
 #divFooter {

@@ -11,12 +11,7 @@
         </div>
 
         <div id="divBody">
-        <div id="divMainDraw" style="height:700px; width:500px">
-        <div id="divCanvases" style="position:relative; height:500px; width:500px" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <canvas id="canvas_main" width="500" height="500" style="z-index: 1; position:absolute; left:0px; top:0px;">Your browser does not supprt Canvas!</canvas>
-        <canvas id="canvas_grid" width="500" height="500" style="z-index: 2; position:absolute; left:0px; top:0px; " onclick="colorCellOnClick()" >Your browser does not supprt Canvas!</canvas>
-        <br />
-        </div>
+
         <div id="divControls" >
         <table>
             <tr>
@@ -43,9 +38,49 @@
      </table>
         <hr />
         <div id="divShapes">
+            <p align=center><strong>Draggable Shapes</strong></p>
+            <table>
+                <tr>
+                    <td>Block
+                        <img id="imgShape" src="images/block.png" width="75" height="75" draggable="true" ondragstart="drag(event)" value="block" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>Beehive
+                        <img id="imgShape" src="images/beehive.png" width="75" height="75" draggable="true" ondragstart="drag(event)" value="beehive" onmousedown="getPos(event)" />
+                    </td>
+                    <td>Loaf
+                        <img id="imgShape" src="images/loaf.png" width="75" height="75" draggable="true" ondragstart="drag(event)" value="loaf" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>Boat
+                        <img id="imgShape" src="images/boat.png" width="75" height="75" draggable="true" ondragstart="drag(event)" value="boat" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>Beacon
+                        <img id="imgShape" src="images/Beacon.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="beacon" onmousedown="getPos(event)"/>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>Blinker
+                        <img id="imgShape" src="images/blinker.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="blinker" onmousedown="getPos(event)" />
+                    </td>
+                    <td>Glider
+                        <img id="imgShape" src="images/glider.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="glider" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>LWSS
+                        <img id="imgShape" src="images/lwss.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="lwss" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>Toad
+                        <img id="imgShape" src="images/toad.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="toad" onmousedown="getPos(event)"/>
+                    </td>
+                    <td>Pulsar
+                        <img id="imgShape" src="images/pulsar.gif" width="75" height="75" draggable="true" ondragstart="drag(event)" value="pulsar" onmousedown="getPos(event)"/>
+                    </td>
+                </tr>
+            </table>
         <table>
+            </div>
+        <hr/>
         <tr class="controlButtonRow">
-            <td>
+            <!--<td>
             <select id = "imgSelector" oninput="shapeSelect(this.value)" onchange="shapeSelect(this.value)">
                 <option value="block">Block</option>
                 <option value="beehive">Beehive</option>
@@ -60,7 +95,7 @@
             </select>
             <br />
             <img id="imgShape" src="images/block.png" width="75" height="75" draggable="true" ondragstart="drag(event)" onmousedown="getPos(event)"/>
-            </td>
+            </td>-->
  </tr>
 <tr>
     <td>
@@ -75,12 +110,18 @@
     </td>
 </tr>
 </table>
-    </div>
-        </div>
         <span id="spnXY" style="float:right;"></span>
+
+        
+            </div></div>
+            
+                    <div id="divMainDraw" style="height:700px; width:500px">
+        <div id="divCanvases" style="position:relative; height:500px; width:500px" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <canvas id="canvas_main" width="500" height="500" style="z-index: 1; position:absolute; left:0px; top:0px;">Your browser does not supprt Canvas!</canvas>
+        <canvas id="canvas_grid" width="500" height="500" style="z-index: 2; position:absolute; left:0px; top:0px; " onclick="colorCellOnClick()" >Your browser does not supprt Canvas!</canvas>
+        <br />
         </div>
-        
-        
+        </div>
         <div id="divMainStats">
             <table>
                 <tr>
@@ -101,7 +142,6 @@
         
         
         <br />
-        </div>
 <!--        <div id="diagnostic">
         <input type="text" id="xtest"/><input type="text" id="ytest"/>
         <button id="button_testndata" onclick="testndata()">TestNData</button>
