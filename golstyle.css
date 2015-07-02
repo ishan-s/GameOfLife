@@ -1,23 +1,65 @@
+@import url('http://fonts.googleapis.com/css?family=Raleway');
+@import url('http://fonts.googleapis.com/css?family=Roboto');
 
 body {
-    font-family: sans-serif;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+    font-family: Roboto;
+    background-color: black;
+    color: white;
+
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+    
+}
+
+#divBody {
+ background-color: black;
+    padding: 10px;
+    padding-bottom: 60px;
+    padding-left: 25%;
+}
+
+#divControls{
+    background-color: #111111;
+    padding: 20px;
+    border: 2px;
+    border-color: dimgray;
+    border-style: solid;
 }
 
 #divTitle {
-    width: inherit;
+    left:0; right:0;
+    background-color: darkorange;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    align-content: center;
+    
+}
+
+#divTitle h1{
+    width:auto;
+    padding-top: 10px;
+    margin-top: 0;
+    align-content: center;
 }
 .title {
+
     text-align: center;
-    padding-left: 20px;
+    align-content: center;
+    font-family: Raleway;
+    vertical-align: middle;
 }
 
 
 #divMainDraw {
     float:left;
     align: center;
-    padding-left: 20px;
-    padding-top: 20px;
-
+    padding:20px;
 }
 
 #divCanvases {
@@ -25,7 +67,6 @@ body {
 }
 
 #divMainStats {
-    float: right;
     align: center;
     align-content: center;
     width: auto;
@@ -33,18 +74,16 @@ body {
     padding-left: 20px;
 }
 
-#divMainStats table {
-    border: 1px;
-    border-style:double;
-
-}
-
 #divMainStats table td {
-    border: 1px;
-    border-style: groove;
+    border: 2px;
+    border-color: #111111;
+    border-bottom-color: darkorange;
+    
+    border-style: solid;
     align: content;
     padding: 10px;
 }
+
 
 .numbers {
     padding: 20px;
@@ -53,13 +92,30 @@ body {
 #divButtons {
   
 }
+
 table {
     table-layout: fixed;
 }
+#divMainStats table{ 
+    background-color: #111111;
+    border-color: black;
+}
+
 #divControls table td{
     width: 250px;   
     overflow: hidden;
     align: content;
 }
 
+#divFooter {
+   bottom:0;
+   margin-top:50%;
+    margin-bottom: 0 !important;
+   width:100%;
+   background-color: darkorange;
+    height: auto;
+    text-align: center;
+    font-family: Raleway;
+    font-size: 18px;
+}
 

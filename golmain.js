@@ -5,6 +5,7 @@ var canvasGrid = document.getElementById("canvas_grid");
 var canvasMain = document.getElementById("canvas_main");
 var ctxGrid = canvasGrid.getContext("2d");
 var ctxMain = canvasMain.getContext("2d");
+
 var CELL_SIZE=10;
 CELL_SIZE = getParameter('gridsize');
 if(typeof CELL_SIZE=='undefined')
@@ -33,6 +34,7 @@ var COLOR_GREEN = '#1CAC78';
 var COLOR_YELLOW = '#FFFF00';
 var COLOR_ORANGE = '#FF7F00';
 var COLOR_RED = '#FF0000';
+var COLOR_LIGHTGRAY = "#EEEEEE"
 
 var COLORS_RAINBOW = new Array(8);
 COLORS_RAINBOW[1] = COLOR_VIOLET;
@@ -43,6 +45,12 @@ COLORS_RAINBOW[5] = COLOR_YELLOW;
 COLORS_RAINBOW[6] = COLOR_ORANGE;
 COLORS_RAINBOW[7] = COLOR_RED;
 
+function refreshCanvasMain(){
+ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    
+ctxMain.fillStyle = COLOR_LIGHTGRAY;
+ctxMain.fillRect(0, 0, canvasMain.width, canvasMain.height);
+}
 
 //TODO: For change in cell size
 function recalcVars(){
@@ -135,6 +143,7 @@ function resetTempGrid(){
 
 
 function init(){
+    refreshCanvasMain();
     drawGrid();
     updateStatsDisplay();
     
@@ -149,13 +158,13 @@ function init(){
 }
 
 function playPause(val){
-    if(val=="Live!"){
+    if(val=="Live"){
         startAnimation();
-        document.getElementById("button_playpause").value="Freeze!";
+        document.getElementById("button_playpause").value="Freeze";
     }
     else{
         stopAnimation();
-        document.getElementById("button_playpause").value="Live!"
+        document.getElementById("button_playpause").value="Live"
     }
     play = !play;
 }
@@ -207,6 +216,7 @@ function relMouseCoords(event){
 
     canvasX = event.pageX - totalOffsetX;
     canvasY = event.pageY - totalOffsetY;
+        
 
     return {x:canvasX, y:canvasY}
 }
@@ -226,21 +236,24 @@ function drawGrid (){
         ctxGrid.lineTo(500, y);
     }
 
-    ctxGrid.strokeStyle="#eee";
+    ctxGrid.strokeStyle="#DDDDDD";
     ctxGrid.stroke();
 }
 
 function speedChange(playSpeed){
     lifeAnimationTimeout = 2000 * (1/playSpeed);
     clearTimeout(timer);
-    if(play)
+    if(play){
         timer = setInterval(letThereBeLife, lifeAnimationTimeout);
+    }
     
+    //playPause('Live');
     redrawColoredCells();
 }
 
 
 function colorCell(ctx, cellx, celly, rgbColor){
+    //colorCanvasMainBG();
     ctx.fillStyle = rgbColor;
     
     var cellxcoord = cellx * CELL_SIZE + 1;
@@ -255,21 +268,24 @@ function startAnimation(){
 
 function stopAnimation(){
     clearTimeout(timer);
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
     redrawColoredCells();
 }
 
 
 function reset(){
-    playPause("Freeze!");
+    playPause("Freeze");
     
     clearTimeout(timer);
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
      for(var ix=0; ix<numCellsX; ix++)
         for(var iy=0; iy<numCellsY; iy++)
             lifeGrid[ix][iy]=0;
   
-        
+    play=false;
     initStats();
     updateStatsDisplay();
     
@@ -286,7 +302,8 @@ function randomizeSeed(){
         redrawColoredCells();
     }
     
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
     redrawColoredCells();
     
 }
@@ -341,7 +358,9 @@ function colorCellOnCoords(coord){
     else
         lifeGrid[ci.x_index][ci.y_index] = 1;
     
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
+    
     redrawColoredCells();
     document.getElementById("spnXY").innerHTML= ci.x_index+", "+ci.y_index;
     
@@ -360,7 +379,8 @@ function colorCellOnClick(){
         currentPopulation++;
     }
     
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
     redrawColoredCells();
     updateStatsDisplay();
     document.getElementById("spnXY").innerHTML= ci.x_index+", "+ci.y_index;
@@ -427,7 +447,9 @@ return aliveNeighbours;
 
 function letThereBeLife(){
     currentPopulation=0;
-    ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    //ctxMain.clearRect(0, 0, canvasMain.width, canvasMain.height);
+    refreshCanvasMain();
+    
    // alert("letThereBeLife()");
     for(var xi=0; xi<numCellsX; xi++){
         for(var yi=0; yi<numCellsY; yi++){
@@ -508,6 +530,7 @@ function letThereBeLife(){
         }
     }
     
+    timeCycle++;
     
     updateStatsDisplay();
     redrawColoredCells();

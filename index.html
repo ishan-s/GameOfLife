@@ -5,21 +5,22 @@
         <link rel="stylesheet" type="text/css" href="golstyle.css" />
     </head>
     <body onload="init()">
+        <div id="container">
         <div id="divTitle" class="title">
             <h1>Conway's Game of Life</h1>
         </div>
-        <hr />
+
+        <div id="divBody">
         <div id="divMainDraw" style="height:700px; width:500px">
         <div id="divCanvases" style="position:relative; height:500px; width:500px" ondrop="drop(event)" ondragover="allowDrop(event)">
         <canvas id="canvas_main" width="500" height="500" style="z-index: 1; position:absolute; left:0px; top:0px;">Your browser does not supprt Canvas!</canvas>
-        <canvas id="canvas_grid" width="500" height="500" style="z-index: 2; position:absolute; left:0px; top:0px; border:1px solid #000000" onclick="colorCellOnClick()">Your browser does not supprt Canvas!</canvas>
+        <canvas id="canvas_grid" width="500" height="500" style="z-index: 2; position:absolute; left:0px; top:0px; " onclick="colorCellOnClick()" >Your browser does not supprt Canvas!</canvas>
         <br />
         </div>
-            <hr />
-        <div id="divControls">
+        <div id="divControls" >
         <table>
             <tr>
-                <td>Speed:</td>
+                <td>Speed</td>
                 <td><input type="range" name="playSpeed" min="1" max="50" oninput="speedChange(this.value)" onchange="speedChange(this.value)" style="float: right;width:400px !important" value=25/>
                 </td>
         </tr>
@@ -29,18 +30,18 @@
         <tr class="controlButtonRow">
         <div id="divButtons" width="500px" align="center" class="controlbuttons" >
             <td align="center">
-        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live!" style="width:100px;height:50px" />
+        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live" style="width:100px;height:50px" />
         </td>
             <td align="center">
-        <input type="button" id="button_reset" onclick="reset()" value="Reset!" style="width:100px; height:50px"/>
+        <input type="button" id="button_reset" onclick="reset()" value="Reset" style="width:100px; height:50px"/>
         </td>
             <td align="center">
-                <input type="button" id="button_random" onclick="randomizeSeed()" value="Randomize!" style="width:100px; height:50px"/>
+                <input type="button" id="button_random" onclick="randomizeSeed()" value="Randomize" style="width:100px; height:50px"/>
             </td>
         </div>
         </tr>     
      </table>
-        <br />
+        <hr />
         <div id="divShapes">
         <table>
         <tr class="controlButtonRow">
@@ -76,7 +77,6 @@
 </table>
     </div>
         </div>
-        <hr />
         <span id="spnXY" style="float:right;"></span>
         </div>
         
@@ -92,11 +92,16 @@
                     <td>
             <p class="statLabels">Maximum Population</p></td><td><span id='statMaxPopulation' class="numbers"></span></td>
                 </tr>
+                <tr>
+                    <td>
+            <p class="statLabels">Time</p></td><td><span id='statTimeCycle' class="numbers"></span></td>
+                </tr>
         </table>
         </div>
         
-        <br />
         
+        <br />
+        </div>
 <!--        <div id="diagnostic">
         <input type="text" id="xtest"/><input type="text" id="ytest"/>
         <button id="button_testndata" onclick="testndata()">TestNData</button>
@@ -104,9 +109,12 @@
         <span id="prXY"></span>
         </div>-->
         
-        <div id="divFooter"></div>
+        <div id="divFooter">
+            <span id="spnCredits"><strong>Developed by Ishan Shrivastava (ishan.shrivastava@gmail.com) </strong></span>
+        </div>
         <script src="golstats.js"></script>
         <script src="golmain.js"></script>
         <script src="golshapes.js"></script>
+        </div>
 </body>
 </html>
