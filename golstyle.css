@@ -19,9 +19,9 @@ body {
 
 #divBody {
  background-color: black;
-    padding: 10px;
-    padding-bottom: 60px;
-    //margin-left:25%;
+    padding-top: 30px;
+    margin-left: 5%;
+
 }
 
 #divControls{
@@ -72,7 +72,7 @@ body {
 #divMainStats {
     align: center;
     align-content: center;
-    width: auto;
+    width: 400px;
     float:left;
     padding: 20px;
     padding-left: 20px;
@@ -119,12 +119,12 @@ table {
 #divFooter {
    bottom:0;
    margin-top:50%;
-    margin-bottom: 0 !important;
+   margin-bottom: 0 !important;
    width:100%;
    background-color: darkorange;
     height: auto;
-    text-align: center;
     font-family: Raleway;
-    font-size: 18px;
+    font-size: 20px;
+    text-align: center;
 }
 
