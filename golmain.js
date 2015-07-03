@@ -115,10 +115,10 @@ function allowDrop(ev) {
 }
 
 function drag(ev){
-    var selectedshape = imgSelector.options[imgSelector.selectedIndex].value;
+    /*var selectedshape = imgSelector.options[imgSelector.selectedIndex].value;*/
+    var selectedshape=ev.currentTarget.getAttribute('value');
     ev.dataTransfer.setData("shape", selectedshape);
 }
-
 function drop(ev){
     ev.preventDefault();
     
