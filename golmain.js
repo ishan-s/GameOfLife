@@ -160,11 +160,15 @@ function init(){
 function playPause(val){
     if(val=="Live"){
         startAnimation();
+        document.getElementById("button_playpause_img").src="./images/btn_pause.png";
         document.getElementById("button_playpause").value="Freeze";
+        document.getElementById("button_playpause").title="Freeze";
     }
     else{
         stopAnimation();
-        document.getElementById("button_playpause").value="Live"
+        document.getElementById("button_playpause_img").src="./images/btn_play.png";
+        document.getElementById("button_playpause").value="Live";
+        document.getElementById("button_playpause").title="Live"
     }
     play = !play;
 }

@@ -30,13 +30,16 @@
         <tr class="controlButtonRow">
         <div id="divButtons" width="500px" align="center" class="controlbuttons" >
             <td align="center">
-        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live" style="width:100px;height:50px" />
+<!--        <input type="button" id="button_playpause" onclick="playPause(this.value)" value="Live" class="myButton" />-->
+                <button id="button_playpause" title="Live" onclick="playPause(this.value)" value="Live"><img id="button_playpause_img" src="images/btn_play.png" height="50px" width="50px"/></button>
         </td>
             <td align="center">
-        <input type="button" id="button_reset" onclick="reset()" value="Reset" style="width:100px; height:50px"/>
+        <!--<input type="button" id="button_reset" onclick="reset()" value="Reset" />-->
+                <button id="reset" title="Reset" onclick="reset()" value="Live"><img id="button_reset_img" src="images/btn_refresh.png" height="50px" width="50px"/></button>
         </td>
             <td align="center">
-                <input type="button" id="button_random" onclick="randomizeSeed()" value="Randomize" style="width:100px; height:50px"/>
+              <!--  <input type="button" id="button_random" onclick="randomizeSeed()" value="Randomize"/>-->
+                <button id="button_random" title="Randomize" onclick="randomizeSeed()" value="Live"><img id="button_random_img" src="images/btn_shuffle.png" height="50px" width="50px"/></button>
             </td>
         </div>
         </tr>     
