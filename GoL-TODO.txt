@@ -24,12 +24,10 @@ TODO
 BUGS
 ===
 - IE: Controls div not properly aligned [FIXED]
-- FF: Canvas.onClick is not doing anything [FIXED]
+- FF: Canvas.onClick is not doing anything
 - Directly changing the slider at frozen/stopped state messes up the live/freeze cycle. [FIXED]
 
 ----
 11:38 AM 25-Jun-15
 
 12:12 PM 25-Jun-15
-
-5:22 PM 15-Jul-15
